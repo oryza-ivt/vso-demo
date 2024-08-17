@@ -135,10 +135,13 @@ On Vault Server or from a client that has access to Vault Server
 # C. Deploy Apps into Openshift
 On OCP Server or from a client that has `kubectl` or `oc` access to OCP Server
 ## Create Namespaces
-    ```bash
-    kubectl create namespace app-two-namespace
-    kubectl create namespace app-three-namespace
-    ```
+```bash
+# Create Namespace for App Two
+kubectl create namespace app-two-namespace
+
+# Create Namespace for App Three
+kubectl create namespace app-three-namespace
+```
 
 ## Deploy Apps
 Please review the [app-two-deployment.yaml](deployments/app-two-deployment.yaml) and [app-three-deployment.yaml](deployments/app-three-deployment.yaml) before executing this deployments command.
