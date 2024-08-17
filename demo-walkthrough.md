@@ -43,7 +43,7 @@ On Vault Server or from a client that has access to Vault Server
     path "kvv2/*" {
         capabilities = ["list"]
     }
-    path "kvv2/app-two-secrets/*" {
+    path "kvv2/data/app-two-secrets/*" {
         capabilities = ["read","list"]
     }
     EOF
@@ -55,7 +55,7 @@ On Vault Server or from a client that has access to Vault Server
     path "kvv2/*" {
         capabilities = ["list"]
     }
-    path "kvv2/app-three-secrets/*" {
+    path "kvv2/data/app-three-secrets/*" {
         capabilities = ["read","list"]
     }
     EOF
