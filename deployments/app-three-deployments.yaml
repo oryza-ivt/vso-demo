@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: app-three-namespace
+  name: app-three-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-three-demo
+  template:
+    metadata:
+      labels:
+        app: app-three-demo
+    spec:
+      containers:
+      - name: app-three-demo
+        image: oryzaivt/demo-vso-app:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: SECRET_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: app-three-demo-secret
+              key: username
+        - name: SECRET_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-three-demo-secret
+              key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: app-three-namespace
+  name: app-three-demo-service
+spec:
+  type: NodePort
+  selector:
+    app: app-three-demo
+  ports:
+    - protocol: TCP
+      port: 8033
+      targetPort: 8080
+      nodePort: 30033

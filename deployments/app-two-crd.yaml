@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: app-two-namespace
+  name: vault-secretid
+stringData:
+  id: <APP_TWO_SECRET_ID>
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  namespace: app-two-namespace
+  name: vault-connection
+spec:
+  address: http://<VAULT_ADDR>:8200
+  skipTLSVerify: true
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  namespace: app-two-namespace
+  name: vault-auth-approle
+spec:
+  vaultConnectionRef: vault-connection
+  method: appRole
+  mount: approle
+  appRole:
+    roleId: <APP_TWO_ROLE_ID>
+    secretRef: vault-secretid
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  namespace: app-two-namespace
+  name: vault-secret
+spec:
+  type: kv-v2
+  mount: kvv2
+  path: app-two-secrets/app-config
+  destination:
+    name: app-two-demo-secret
+    create: true
+  refreshAfter: 30s
+  rolloutRestartTargets:
+  - kind: Deployment
+    name: app-two-demo
+  vaultAuthRef: app-two-namespace/vault-auth-approle
