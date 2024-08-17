@@ -144,7 +144,7 @@ kubectl create namespace app-three-namespace
 ```
 
 ## Deploy Apps
-Please review the [app-two-deployment.yaml](deployments/app-two-deployment.yaml) and [app-three-deployment.yaml](deployments/app-three-deployment.yaml) before executing this deployments command.
+Please review the [app-two-deployment.yaml](/deployments/app-two-deployment.yaml) and [app-three-deployment.yaml](/deployments/app-three-deployment.yaml) before executing this deployments command.
 1. Deploy App Two
     ```bash
     kubectl apply -f deployments/app-two-deployment.yaml
@@ -190,12 +190,12 @@ Please review the [app-two-deployment.yaml](deployments/app-two-deployment.yaml)
     <br/>Once the status shows as **Succeeded**, the operator is ready to use.
 
 ## Edit VSO CRD Deployment files
-1. Open [app-two-crd.yaml](deployments/app-two-deployment.yaml).
+1. Open [app-two-crd.yaml](/deployments/app-two-deployment.yaml).
     - Replace `<APP_TWO_SECRET_ID>` with `secret_id` for App Two.
     - Replace `<APP_TWO_ROLE_ID>` with  `role_id` for App Two.
     - Replace `<VAULT_ADDR>` with the Vault Server IP address.
 
-2. Open [app-three-crd.yaml](deployments/app-three-deployment.yaml).
+2. Open [app-three-crd.yaml](/deployments/app-three-deployment.yaml).
     - Replace `<APP_THREE_SECRET_ID>` with `secret_id` for App Three.
     - Replace `<APP_THREE_ROLE_ID>` with  `role_id` for App Three.
     - Replace `<VAULT_ADDR>` with the Vault Server IP address.
@@ -207,7 +207,7 @@ Please review the [app-two-deployment.yaml](deployments/app-two-deployment.yaml)
 ## VSO Custom Resource Setup for Demo App
 On OCP Server or from a client that has `kubectl` or `oc` access to OCP Server.
 
-Please review the [app-two-crd.yaml](deployments/app-two-deployment.yaml) and [app-three-crd.yaml](deployments/app-three-deployment.yaml) before executing this deployments command.
+Please review the [app-two-crd.yaml](/deployments/app-two-deployment.yaml) and [app-three-crd.yaml](/deployments/app-three-deployment.yaml) before executing this deployments command.
 
 1. Create CRD for App Two
     ```bash
