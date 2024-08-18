@@ -5,6 +5,7 @@ metadata:
   namespace: app-three-namespace
   name: vault-secretid
 stringData:
+  # AppRole's `secret_id`, the key should be `id`
   id: <APP_THREE_SECRET_ID>
 ---
 apiVersion: secrets.hashicorp.com/v1beta1
@@ -13,6 +14,7 @@ metadata:
   namespace: app-three-namespace
   name: vault-connection
 spec:
+  # address to the Vault server.
   address: http://<VAULT_ADDR>:8200
   skipTLSVerify: true
 ---
@@ -22,11 +24,20 @@ metadata:
   namespace: app-three-namespace
   name: vault-auth-approle
 spec:
+  # VaultConnectionRef of the corresponding VaultConnection CustomResource.
   vaultConnectionRef: vault-connection
+
+  # Method to use when authenticating to Vault.
   method: appRole
+
+  # Mount to use when authenticating to auth method.
   mount: approle
+
   appRole:
+    # AppRole's `role_id`
     roleId: <APP_TWO_ROLE_ID>
+
+    # Kubernetes Secret's to lookup for AppRole's `secret_id`
     secretRef: vault-secretid
 ---
 apiVersion: secrets.hashicorp.com/v1beta1
@@ -35,14 +46,27 @@ metadata:
   namespace: app-three-namespace
   name: vault-secret
 spec:
+  # KV Engine Type
   type: kv-v2
+
+  # KV mount path
   mount: kvv2
+
+  # KV Secret's path
   path: app-three-secrets/app-config
+
   destination:
+    # Secret's (Kubernetes Secret) name
     name: app-three-demo-secret
     create: true
+
+  # RefreshAfter a period of time, in duration notation e.g. 30s, 1m, 24h
   refreshAfter: 30s
+
+  # Trigger `rollout-restart` for specified target (Deployments, StatefulSets, etc.)
   rolloutRestartTargets:
   - kind: Deployment
     name: app-three-demo
+
+  # VaultAuthRef to the VaultAuth resource
   vaultAuthRef: app-three-namespace/vault-auth-approle
