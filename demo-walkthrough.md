@@ -1,5 +1,7 @@
-# Prerequisites
-**TODO!**
+### Prerequisites
+- RedHat Openshift / Kubernetes Cluster already installed
+- Hashicorp Vault already installed
+- Required authentications manage cluster, create secret and manage policies.
 
 # A. Vault Setup
 On Vault Server or from a client that has access to Vault Server
@@ -140,23 +142,23 @@ On OCP Server or from a client that has `kubectl` or `oc` access to OCP Server
 ## Create Namespaces
 ```bash
 # Create Namespace for App Two
-kubectl create namespace app-two-namespace
+oc create namespace app-two-namespace
 
 # Create Namespace for App Three
-kubectl create namespace app-three-namespace
+oc create namespace app-three-namespace
 ```
 
 ## Deploy Apps
 Please review the [app-two-deployments.yaml](/deployments/app-two-deployments.yaml) and [app-three-deployments.yaml](/deployments/app-three-deployments.yaml) before executing this deployments command.
 1. Deploy App Two
     ```bash
-    kubectl apply -f deployments/app-two-deployments.yaml
-    kubectl get all -n app-two-namespace
+    oc apply -f deployments/app-two-deployments.yaml
+    oc get all -n app-two-namespace
     ```
 2. Deploy App Three
     ```bash
-    kubectl apply -f deployments/app-three-deployments.yaml
-    kubectl get all -n app-three-namespace
+    oc apply -f deployments/app-three-deployments.yaml
+    oc get all -n app-three-namespace
     ```
 - *The Apps are using image from [oryzaivt/demo-vso-app:latest](https://hub.docker.com/r/oryzaivt/demo-vso-app) on **Docker Hub**. That Image is built from Github repo https://github.com/oryza-ivt/demo-vso-app. You could build it from the source code and publish it into your Private Registry, do not forget to change image Url on the deployment files if thats the case.*
 - *The Apps are exposed using `NodePort` services for testing purpose, you might adjust it to using services exposed by ingress or other methods.*
@@ -167,7 +169,7 @@ Please review the [app-two-deployments.yaml](/deployments/app-two-deployments.ya
 
 
 # D. VSO Setup
-## Install VSO via OperatorHub [NEED REVIEW!]
+## Install VSO via OperatorHub
 1. Login to OpenShift Console
     <br/>Open your OpenShift web console and log in with appropriate credentials.
 
@@ -215,23 +217,23 @@ Please review the [app-two-crd.yaml](/deployments/app-two-deployments.yaml) and 
 1. Create CRD for App Two
     ```bash
     # Deploy VSO CRD for App Two : `VaultConnection`, `VaultAuth`, `VaultStaticSecret`
-    kubectl apply -f deployments/app-two-crd.yaml
+    oc apply -f deployments/app-two-crd.yaml
 
     # Check deployed CRD
-    kubectl get VaultConnection -n app-two-namespace
-    kubectl get VaultAuth -n app-two-namespace
-    kubectl get VaultStaticSecret -n app-two-namespace
+    oc get VaultConnection -n app-two-namespace
+    oc get VaultAuth -n app-two-namespace
+    oc get VaultStaticSecret -n app-two-namespace
     ```
 
 2. Create CRD for App Three
     ```bash
     # Deploy VSO CRD for App Three : `VaultConnection`, `VaultAuth`, `VaultStaticSecret`
-    kubectl apply -f deployments/app-three-crd.yaml
+    oc apply -f deployments/app-three-crd.yaml
 
     # Check deployed CRD
-    kubectl get VaultConnection -n app-three-namespace
-    kubectl get VaultAuth -n app-three-namespace
-    kubectl get VaultStaticSecret -n app-three-namespace
+    oc get VaultConnection -n app-three-namespace
+    oc get VaultAuth -n app-three-namespace
+    oc get VaultStaticSecret -n app-three-namespace
     ```
 
 
