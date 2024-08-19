@@ -14,3 +14,9 @@ Summary for the Demo :
 
 
 Demo Walkthrough : [demo-walkthrough.md](demo-walkthrough.md)
+
+
+<br>
+
+## Disclaimer
+This walkthrough demonstrates the integration of HashiCorp Vault with OpenShift (OCP) or Kubernetes using the Vault Secrets Operator. All steps are based on the official documentation of HashiCorp Vault and the Vault Secrets Operator. Before implementing any changes in your environment, please refer to your organization’s security policies and procedures (including those specific to Red Hat OpenShift).

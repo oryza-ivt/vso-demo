@@ -1,3 +1,6 @@
+# Prerequisites
+**TODO!**
+
 # A. Vault Setup
 On Vault Server or from a client that has access to Vault Server
 
@@ -241,5 +244,11 @@ Please review the [app-two-crd.yaml](/deployments/app-two-deployments.yaml) and 
 2. Refresh apps on the browser to see the updated secrets.
 
 
+<br/>
 
-
+# References
+- https://developer.hashicorp.com/vault/docs/platform/k8s/vso/openshift
+- https://developer.hashicorp.com/vault/docs/platform/k8s/vso/sources/vault
+- https://developer.hashicorp.com/vault/docs/platform/k8s/vso/api-reference
+- https://hub.docker.com/r/oryzaivt/demo-vso-app
+- https://github.com/oryza-ivt/demo-vso-app
