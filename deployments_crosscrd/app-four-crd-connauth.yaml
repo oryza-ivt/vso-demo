@@ -1,0 +1,35 @@
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  namespace: vault-secrets-operator-system
+  name: vault-connection
+spec:
+  # address to the Vault server.
+  address: http://192.168.5.145:8200
+  skipTLSVerify: true
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  namespace: vault-secrets-operator-system
+  name: vault-auth-approle-app-four
+spec:
+  # VaultConnectionRef of the corresponding VaultConnection CustomResource.
+  vaultConnectionRef: vault-secrets-operator-system/vault-connection
+
+  # Method to use when authenticating to Vault.
+  method: appRole
+
+  # Mount to use when authenticating to auth method.
+  mount: approle
+
+  allowedNamespaces:
+    - app-four-namespace    # --> Namespace of targeted App
+
+  appRole:
+    # AppRole's `role_id`
+    roleId: 6fed37a5-b377-8675-3167-7f9737518cd6
+
+    # Kubernetes Secret's to lookup for AppRole's `secret_id`
+    secretRef: vault-secretid-app-four

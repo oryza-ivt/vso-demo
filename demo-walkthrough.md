@@ -1,6 +1,7 @@
 ### Prerequisites
 - RedHat Openshift / Kubernetes Cluster already installed
 - Hashicorp Vault already installed
+- Image registry (e.g. DockerHub) that can be accessed by Openshift / Kubernetes Cluster.
 - Required authentications manage cluster, create secret and manage policies.
 
 # A. Vault Setup
